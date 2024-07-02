@@ -1,7 +1,5 @@
 # Customizing RESTAdapter in Ember.js for Form Data POST Requests
 
-Hey LinkedIn community! 👋
-
 I recently tackled a project where I needed to customize the `RESTAdapter` in Ember.js to handle `createRecord` requests using form data. Here's a quick guide on how I achieved it:
 
 ## 💡 Why Customize `RESTAdapter`?
