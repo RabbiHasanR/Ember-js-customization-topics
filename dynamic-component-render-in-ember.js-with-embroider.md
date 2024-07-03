@@ -14,7 +14,33 @@ Embroider provides tools like `importSync` and `ensureSafeComponent` to help wit
 
 ## Step-by-Step Implementation
 
-### 1. Create a Dynamic Component
+### 1. Update `ember-cli-build.js` to Allow Unsafe Dynamic Components
+
+First, ensure that your `ember-cli-build.js` file is configured correctly to allow unsafe dynamic components.
+
+### ember-cli-build.js
+
+```javascript
+  'use strict';
+  const { Webpack } = require('@embroider/webpack');
+  const EmberApp = require('ember-cli/lib/broccoli/ember-app');
+
+  module.exports = function (defaults) {
+    const app = new EmberApp(defaults, {
+      ....
+    });
+
+    return require('@embroider/compat').compatBuild(app, Webpack, {
+      .....
+      allowUnsafeDynamicComponents: true,
+    });
+  };
+```
+
+### Explanation
+- allowUnsafeDynamicComponents: This option enables the use of dynamic components in your application, which is crucial for rendering components based on runtime data.
+
+### 2. Create a Dynamic Component
 
 First, create a dynamic component that will handle the rendering of other components based on the name provided.
 
@@ -53,7 +79,7 @@ export default class DynamicComponent extends Component {
 
 - get componentName: This property holds the name of the component to be rendered which you passed as args. You can update this property based on the data received from an API.
 
-### 2. Dynamic Component Template
+### 3. Dynamic Component Template
 
 Create the template for the dynamic component to render the desired component dynamically.
 
